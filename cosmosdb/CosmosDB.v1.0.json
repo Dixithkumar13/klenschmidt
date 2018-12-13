@@ -48,7 +48,8 @@
         "westus2",
         "koreacentral",
         "koreasouth"
-      ]
+      ],
+      "defaultValue": "eastus2"	 
     },
     "readRegionLocation": {
       "type": "string",
