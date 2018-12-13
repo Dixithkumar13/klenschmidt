@@ -83,7 +83,8 @@
         "westus2",
         "koreacentral",
         "koreasouth"
-      ]
+      ],
+      "defaultValue": "eastus"	    
     }, 
 	"consistencyLevel": {
       "type": "string",
@@ -131,13 +132,13 @@
 		],
 		"defaultValue": false,
 		"metadata": {
-			"description": "Enable storage account firewall for external IP addresses. Default is false"
+			"description": "Enable CosmosDb firewall for external IP addresses. Default is false"
 		}
 	},
 	"publicIpRules": {
 		"type": "string",
 		"metadata": {
-			"description": "IP FW rules for Storage Account"
+			"description": "IP FW rules for CosmosDb Account"
 		}
 	},
 	"isVirtualNetworkFilterEnabled": {
@@ -154,13 +155,13 @@
 	"vnetResourceGroup": {
 		"type": "string",
 		"metadata": {
-			"description": ""
+			"description": "Resource group of the vnet that you have subnets with the Microsoft.AzureCosmosDb Endpoint enabled"
 		}
 	},
 	"vnet": {
 			"type": "string",
 			"metadata": {
-				"description": "the vnet that you have subnets with the Microsoft.Storage Service Endpoint enabled"
+				"description": "the vnet that you have subnets with the Microsoft.AzureCosmosDb Endpoint enabled"
 			}
 	},
 	"vnetSubnets": {
