@@ -23,18 +23,6 @@
 	"enableMultipleWriteLocations": {
       "Value": true
     },
-	"isVirtualNetworkFilterEnabled": {
-      "Value": false
-    },
-	"vnetResourceGroup": {
-		"Value": "SampleVnetResourceGroup"
-	},
-	"vnetRules": {
-		"Value": ["SampleVnet"]
-	}, 	
-	"vnet": {
-            "value": "sampleVNet"
-    },
     "location": {
       "Value": "eastus2"
     },
@@ -51,7 +39,7 @@
 		"Value": 1
 	},
 	"SequenceStartIndex": {
-		"Value": 608
+		"Value": 609
 	}
 	}
   }
