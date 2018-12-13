@@ -124,31 +124,6 @@
         "description": ""
       }
     },
-	"isVirtualNetworkFilterEnabled": {
-      "type": "bool",
-      "defaultValue": false,
-      "metadata": {
-        "description": ""
-      }
-    },
-	"vnet": {
-            "type": "string",            
-            "metadata": {
-                "description": "the vnet that you have subnets with the Microsoft.Storage Service Endpoint enabled"
-            }
-        },
-	"vnetResourceGroup": {
-		"type": "string",
-		"metadata": {
-			"description": ""
-		}
-	},
-	"vnetRules": {
-		"type": "array",
-		"metadata": {
-			"description": ""
-		}
-	}, 	
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -205,21 +180,7 @@
 		}
 	}
   },
-  "variables": {
-	"emptyArray": [],
-	"copy": [            
-		{
-			"name": "virtualNetworkRules",
-			"count": "[length(parameters('vnetRules'))]",
-			"input": {
-				"id": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('vnetResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('vnet'), '/subnets/' ,parameters('vnetRules')[copyIndex('virtualNetworkRules')])]",
-				"action": "Allow"
-			}
-		}
-	],
-	"vnetRulesArray": "[if(equals(parameters('isVirtualNetworkFilterEnabled'), 'true'), variables('virtualNetworkRules'), variables('emptyArray'))]", 
-    "offerType": "Standard"
-  },
+  "variables": {},
   "resources": [
    {
       "apiVersion": "2015-04-08",
@@ -246,8 +207,6 @@
 				"failoverPriority": 1
 			  }
 		],
-		"isVirtualNetworkFilterEnabled": "[parameters('isVirtualNetworkFilterEnabled')]",
-		"virtualNetworkRules": "[variables('vnetRulesArray')]",		
         "capabilities": [ ]
       },	  
 		"copy": {
