@@ -133,7 +133,7 @@
     },
 	"SWL": {
 		"type": "string",
-		"defaultValue": "pcs",
+		"defaultValue": "PCS",
 		"allowedValues": [
 			"PCS",
 			"APP"
