@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apiType": {
+      "Value": "SQL"
+    },
+ "writeRegionLocation": {
+      "Value": "eastus2"
+    },
+    "readRegionLocation": {
+		"Value": "eastus"
+    }, 
+	"consistencyLevel": {
+      "value": "Session"
+    },
+    "maxStalenessPrefix": {
+      "value": 10
+    },
+    "maxIntervalInSeconds": {
+      "value": 5
+    },	
+	"enableMultipleWriteLocations": {
+      "value": true
+    },
+	"isVirtualNetworkFilterEnabled": {
+      "value": true
+    },
+	"isExternalIpFirewallrulesEnabled": {
+      "value": true
+    },
+	"publicIpRules": {
+		"value": "24.12.158.69"
+	},	
+	"vnetResourceGroup": {
+		"Value": "SampleVnetResourceGroup"
+	},
+	"vnet": {
+        "value": "SampleVnet"
+    },
+	"vnetSubnets": {
+		"Value": ["Sample"]
+	},
+    "location": {
+      "Value": "eastus2"
+    },
+	"SWL": {
+		"Value": "PCS"
+	},
+	"CosmosDBLocationShortForm": {
+		"Value": "eus2"
+	},
+	"SDLC": {
+		"Value": "Development"
+	},
+	"NumberOfInstances": {
+		"Value": 1
+	},
+	"SequenceStartIndex": {
+		"Value": 60
+	}
+	}
+  }
