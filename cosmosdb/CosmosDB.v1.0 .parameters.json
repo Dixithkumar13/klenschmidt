@@ -33,7 +33,7 @@
 		"value": "24.12.158.69"
 	},	
 	"vnetResourceGroup": {
-		"Value": "SampleVnetResourceGroup"
+		"Value": ""
 	},
 	"vnet": {
         "value": "SampleVnet"
