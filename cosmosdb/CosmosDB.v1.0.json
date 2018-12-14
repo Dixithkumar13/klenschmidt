@@ -167,7 +167,7 @@
 	},
 	"vnetSubnets": {
 		"type": "array",
-		"defaultValue":[""],
+		"defaultValue":["Sample"],
 		"metadata": {
 			"description": ""
 		}
