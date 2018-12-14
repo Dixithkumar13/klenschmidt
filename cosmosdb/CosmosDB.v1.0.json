@@ -154,6 +154,7 @@
     },	
 	"vnetResourceGroup": {
 		"type": "string",
+		"defaultValue":"",
 		"metadata": {
 			"description": "Resource group of the vnet that you have subnets with the Microsoft.AzureCosmosDb Endpoint enabled"
 		}
@@ -166,6 +167,7 @@
 	},
 	"vnetSubnets": {
 		"type": "array",
+		"defaultValue":[""],
 		"metadata": {
 			"description": ""
 		}
