@@ -21,7 +21,7 @@
       "value": 5
     },  
 	"enableMultipleWriteLocations": {
-      "value": true
+      "value": false
     },
 	"publicIpRules": {
 		"value": "96.74.246.57"
@@ -30,13 +30,13 @@
       "value": "true"
     },	
 	"exixtingVirtualNetworkResourceGroup": {		
-		"value":"KSINC-PRD-EUS2-VNET-RG01"		
+		"value":"testVM"		
 	},
 	"exixtingVirtualNetwork": {
-		"value":"KSINC-PRD-EUS2-VNET01"
+		"value":"testVM-vnet01"
 	},
 	"exixtingVirtualNetworkSubnets": {
-		"value":["ksinc-prd-bastion", "ksinc-prd-security", "ksinc-prd-management", "ksinc-prd-automation"]
+		"value":["default"]
 	}, 	
     "location": {
       "value": "East US2"
@@ -54,7 +54,7 @@
 		"value": 1
 	},
 	"SequenceStartIndex": {
-		"value": 1
+		"value": 50
 	}
   }
 }
