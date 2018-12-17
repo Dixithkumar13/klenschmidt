@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+	"mainTemplateBlobURI": {
+		"value":"https://templatest.blob.core.windows.net/template/ServiceBus.v1.0.json"
+	},
+	"storageSASToken": {
+		"value":"sp=r&st=2018-12-06T01:36:30Z&se=2018-12-06T09:36:30Z&spr=https&sv=2018-03-28&sig=9ui5tjZYwdSQ3hQViLvbcWzbRLpWEuOgg0231ipcLz8%3D&sr=b"
+	},  
+    "serviceBusTopicName": {
+		"value":"testtopic1234342"
+    },	
+    "serviceBusTopicSubscriptionName": {
+		"value":[
+			{
+				"subscriptionName": "firstSubscription",
+				"sqlFilter": "Name='Sample1'"
+			},
+			{
+				"subscriptionName": "secondSubscription",
+				"sqlFilter": "Name='Sample2'"
+			}
+		]
+    },
+	"SBtagValues": {
+		"value": {}
+	},
+	"SWL": {
+		"value":"PCS"
+	},
+	"ServiceBusLocationShortForm": {
+		"value":"eus2"
+	},
+	"SDLC": {
+		"value":"Development"
+	},
+	"NumberOfInstances": {
+		"value":1
+	},
+	"SequenceStartIndex": {
+		"value":1
+	}
+  }
+}

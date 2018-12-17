@@ -1,0 +1,129 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+		"mainTemplateBlobURI": {
+		  "type": "string",
+		  "metadata": {
+			"description": ""
+		  }
+		},
+		"storageSASToken": {
+		  "type": "string",
+		  "metadata": {
+			"description": ""
+		  }
+		},
+		"serviceBusTopicName": {
+		  "type": "string",
+		  "metadata": {
+			"description": "Name of the Service Bus Topic"
+		  }
+		},
+		"serviceBusTopicSubscriptionName": {
+		  "type": "array"
+		},   
+		"location": {
+		  "type": "string",
+		  "defaultValue": "[resourceGroup().location]",
+		  "metadata": {
+			"description": "Location for all resources."
+		  }
+		},
+		"SBtagValues": {
+			"type": "object"
+		},
+		"SWL": {
+			"type": "string",
+			"defaultValue": "PCS",
+			"allowedValues": [
+				"PCS",
+				"APP"
+			],
+			"metadata": {
+				"description": ""
+			}
+		},
+		"ServiceBusLocationShortForm": {
+			"type": "string",
+			"defaultValue": "eus",
+			"allowedValues": [
+				"eus",
+				"eus2"
+			],
+			"metadata": {
+				"description": ""
+			}
+		},
+		"SDLC": {
+			"type": "string",
+			"defaultValue": "Development",
+			"allowedValues": [
+				"Development",
+				"UAT",			
+				"PRD"
+			],
+			"metadata": {
+				"description": ""
+			}
+		},
+		"NumberOfInstances": {
+				"type": "int",
+				"defaultValue": 5,
+				"metadata": {
+					"description": "No of storages to create"
+				}
+			},
+		"SequenceStartIndex": {
+			"type": "int",
+			"defaultValue": 1,
+			"metadata": {
+				"description": ""
+			}	
+		}
+	},
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "name": "[concat('myparent', copyIndex())]",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+					"uri": "[concat(parameters('mainTemplateBlobURI'),'?', parameters('storageSASToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"serviceBusTopicName": {
+						"value":"[parameters('serviceBusTopicName')]"
+					},	
+					"serviceBusTopicSubscriptionName": {
+						"value": "[parameters('serviceBusTopicSubscriptionName')]"
+					},
+					"SBtagValues": {
+						"value": "[parameters('SBtagValues')]"
+					},
+					"SWL": {
+						"value":"[parameters('SWL')]"
+					},
+					"ServiceBusLocationShortForm": {
+						"value":"[parameters('ServiceBusLocationShortForm')]"
+					},
+					"SDLC": {
+						"value":"[parameters('SDLC')]"
+					},
+					"sbSquenceIndex": {
+						"value":"[add(parameters('sequenceStartIndex'), copyIndex())]"
+					}	
+				}
+            },
+			"copy": {
+                "name": "serviceBusCopy",
+                "count": "[parameters('NumberOfInstances')]"
+            }
+        }
+    ],
+    "outputs": {        
+    }
+}
