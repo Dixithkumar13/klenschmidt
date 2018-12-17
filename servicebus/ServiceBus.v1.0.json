@@ -65,7 +65,7 @@
 	
   },
   "variables": {
-		"serviceBusNamespaceName":"[toLower(concat(substring(parameters('SWL'), 0, 3),string(parameters('sbSquenceIndex')),substring(parameters('SDLC'), 0, 3),parameters('ServiceBusLocationShortForm'),'sb'))]",
+		"serviceBusNamespaceName":"[toLower(concat(substring(parameters('SWL'), 0, 3),string(parameters('sbSquenceIndex')),substring(parameters('SDLC'), 0, 3),parameters('ServiceBusLocationShortForm'),'sb'))]"
   },
   "resources": [
     {
