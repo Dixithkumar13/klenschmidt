@@ -3,13 +3,13 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "apiType": {
-      "Value": "SQL"
+      "value": "SQL"
     },
- "writeRegionLocation": {
-      "Value": "eastus2"
+	"writeRegionLocation": {
+	  "value": "eastus2"
     },
     "readRegionLocation": {
-		"Value": "eastus"
+	  "value": "eastus"
     }, 
 	"consistencyLevel": {
       "value": "Session"
@@ -19,45 +19,42 @@
     },
     "maxIntervalInSeconds": {
       "value": 5
-    },	
+    },  
 	"enableMultipleWriteLocations": {
-      "value": false
-    },
-	"isVirtualNetworkFilterEnabled": {
-      "value": true
-    },
-	"isExternalIpFirewallrulesEnabled": {
       "value": true
     },
 	"publicIpRules": {
-		"value": "24.12.158.69"
-	},	
-	"vnetResourceGroup": {
-		"Value": ""
+		"value": "96.74.246.57"
 	},
-	"vnet": {
-        "value": "SampleVnet"
-    },
-	"vnetSubnets": {
-		"Value": ["Sample"]
+	"isVirtualNetworkFilterEnabled": {
+      "value": "true"
+    },	
+	"exixtingVirtualNetworkResourceGroup": {		
+		"value":"KSINC-PRD-EUS2-VNET-RG01"		
 	},
+	"exixtingVirtualNetwork": {
+		"value":"KSINC-PRD-EUS2-VNET01"
+	},
+	"exixtingVirtualNetworkSubnets": {
+		"value":["ksinc-prd-bastion", "ksinc-prd-security", "ksinc-prd-management", "ksinc-prd-automation"]
+	}, 	
     "location": {
-      "Value": "eastus2"
+      "value": "East US2"
     },
 	"SWL": {
-		"Value": "PCS"
+		"value": "PCS"
 	},
 	"CosmosDBLocationShortForm": {
-		"Value": "eus2"
+		"value": "eus2"
 	},
 	"SDLC": {
-		"Value": "Development"
+		"value": "Development"		
 	},
 	"NumberOfInstances": {
-		"Value": 1
+		"value": 1
 	},
 	"SequenceStartIndex": {
-		"Value": 60
-	}
+		"value": 1
 	}
   }
+}
