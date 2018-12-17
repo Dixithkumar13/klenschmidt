@@ -33,7 +33,7 @@
 		"value":"testVM"		
 	},
 	"exixtingVirtualNetwork": {
-		"value":"testVM-vnet01"
+		"value":"testVM-vnet"
 	},
 	"exixtingVirtualNetworkSubnets": {
 		"value":["default"]
