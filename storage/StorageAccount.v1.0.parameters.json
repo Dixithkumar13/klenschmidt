@@ -21,7 +21,7 @@
 			}
         },
 	    "DefaultAction": {
-            "value": "Allow"
+            "value": "Deny"
         },
         "setStorageAccountExternalIpFirewallrules": {
             "value": "true"
@@ -63,7 +63,7 @@
             "value" : 1
 	    },
 		"sequenceStartIndex": {
-            "value": 1010
+            "value": 1020
         }
     }   
 }
