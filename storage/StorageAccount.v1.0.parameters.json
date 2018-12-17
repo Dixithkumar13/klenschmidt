@@ -20,6 +20,9 @@
             "value": {
 			}
         },
+	    "DefaultAction": {
+            "value": "Allow"
+        },
         "setStorageAccountExternalIpFirewallrules": {
             "value": "true"
         },
