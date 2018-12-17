@@ -21,7 +21,7 @@
       "value": 5
     },  
 	"enableMultipleWriteLocations": {
-      "value": false
+      "value": true
     },
 	"publicIpRules": {
 		"value": "96.74.246.57"
