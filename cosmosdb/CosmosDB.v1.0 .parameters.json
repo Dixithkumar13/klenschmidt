@@ -21,7 +21,7 @@
       "value": 5
     },	
 	"enableMultipleWriteLocations": {
-      "value": true
+      "value": false
     },
 	"isVirtualNetworkFilterEnabled": {
       "value": true
