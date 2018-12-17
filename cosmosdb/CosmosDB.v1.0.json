@@ -49,7 +49,7 @@
         "koreacentral",
         "koreasouth"
       ],
-      "defaultValue": "eastus2"	 
+	  "defaultValue": "eastus2"
     },
     "readRegionLocation": {
       "type": "string",
@@ -84,7 +84,7 @@
         "koreacentral",
         "koreasouth"
       ],
-      "defaultValue": "eastus"	    
+	  "defaultValue": "eastus"
     }, 
 	"consistencyLevel": {
       "type": "string",
@@ -124,50 +124,37 @@
         "description": ""
       }
     },
-	"isExternalIpFirewallrulesEnabled": {
-		"type": "bool",
-		"allowedValues": [
-			true,
-			false
-		],
-		"defaultValue": false,
-		"metadata": {
-			"description": "Enable CosmosDb firewall for external IP addresses. Default is false"
-		}
-	},
 	"publicIpRules": {
 		"type": "string",
 		"metadata": {
-			"description": "IP FW rules for CosmosDb Account"
+			"description": "IP FW rules for AzureCosmosDb"
 		}
 	},
 	"isVirtualNetworkFilterEnabled": {
-      "type": "bool",
+      "type": "string",
 	  "allowedValues": [
-			true,
-			false
+			"true",
+			"false"
 		],
-      "defaultValue": false,
+      "defaultValue": "false",
       "metadata": {
         "description": ""
       }
     },	
-	"vnetResourceGroup": {
-		"type": "string",
-		"defaultValue":"",
+	"exixtingVirtualNetworkResourceGroup": {
+		"type": "string",		
 		"metadata": {
-			"description": "Resource group of the vnet that you have subnets with the Microsoft.AzureCosmosDb Endpoint enabled"
+			"description": ""
 		}
 	},
-	"vnet": {
+	"exixtingVirtualNetwork": {
 			"type": "string",
 			"metadata": {
-				"description": "the vnet that you have subnets with the Microsoft.AzureCosmosDb Endpoint enabled"
+				"description": "the vnet that you have subnets with the Microsoft.AzureCosmosDB Endpoint enabled"
 			}
 	},
-	"vnetSubnets": {
-		"type": "array",
-		"defaultValue":["Sample"],
+	"exixtingVirtualNetworkSubnets": {
+		"type": "array",		
 		"metadata": {
 			"description": ""
 		}
@@ -217,7 +204,7 @@
 		"type": "int",
 		"defaultValue": 5,
 		"metadata": {
-			"description": "No of storages to create"
+			"description": "No of CosmosDB to create"
 		}
 	},
 	"SequenceStartIndex": {
@@ -234,15 +221,15 @@
 	"copy": [            
 		{
 			"name": "virtualNetworkRules",
-			"count": "[length(parameters('vnetSubnets'))]",
+			"count": "[length(parameters('exixtingVirtualNetworkSubnets'))]",
 			"input": {
-				"id": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('vnetResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('vnet'), '/subnets/' ,parameters('vnetSubnets')[copyIndex('virtualNetworkRules')])]",
+				"id": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('exixtingVirtualNetworkResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('exixtingVirtualNetwork'), '/subnets/' ,parameters('exixtingVirtualNetworkSubnets')[copyIndex('virtualNetworkRules')])]",
 				"action": "Allow"
 			}
 		}
 	],
 	"vnetRulesArray": "[if(equals(parameters('isVirtualNetworkFilterEnabled'), 'true'), variables('virtualNetworkRules'), variables('emptyArray'))]", 
-	"ipRulesArray": "[if(equals(parameters('isExternalIpFirewallrulesEnabled'), 'true'), variables('publicIpRules'), variables('emptystring'))]",
+	"ipRulesArray": "[if(greater(length(parameters('publicIpRules')), 0), concat(parameters('publicIpRules'),',104.42.195.92,40.76.54.131,52.176.6.30,52.169.50.45,52.187.184.26,0.0.0.0'), '104.42.195.92,40.76.54.131,52.176.6.30,52.169.50.45,52.187.184.26,0.0.0.0')]",
     "offerType": "Standard"
   },
   "resources": [
@@ -271,13 +258,12 @@
 				"failoverPriority": 1
 			  }
 		],
-		"isVirtualNetworkFilterEnabled": "[parameters('isVirtualNetworkFilterEnabled')]",
+		"isVirtualNetworkFilterEnabled": "[bool(parameters('isVirtualNetworkFilterEnabled'))]",
 		"virtualNetworkRules": "[variables('vnetRulesArray')]",			
-		"ipRangeFilter": "104.42.195.92,40.76.54.131,52.176.6.30,52.169.50.45,52.187.184.26,0.0.0.0",
-		"capabilities": [ ]
+		"ipRangeFilter": "[variables('ipRulesArray')]"
       },	  
 		"copy": {
-			"name": "storagecopy",
+			"name": "CosmosDBcopy",
 			"count": "[parameters('NumberOfInstances')]"
 		},
       "tags": {
@@ -285,5 +271,6 @@
       }
     }
   ],
-  "outputs": {}
+  "outputs": {
+  }
 }
