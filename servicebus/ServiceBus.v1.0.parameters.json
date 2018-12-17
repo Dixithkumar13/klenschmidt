@@ -6,7 +6,7 @@
 		"value":"https://templatest.blob.core.windows.net/template/ServiceBus.v1.0.json"
 	},
 	"storageSASToken": {
-		"value":"sp=r&st=2018-12-06T01:36:30Z&se=2018-12-06T09:36:30Z&spr=https&sv=2018-03-28&sig=9ui5tjZYwdSQ3hQViLvbcWzbRLpWEuOgg0231ipcLz8%3D&sr=b"
+		"value":"sp=r&st=2018-12-17T16:47:13Z&se=2020-01-02T00:47:13Z&spr=https&sv=2018-03-28&sig=LFTOJyskJBh1QGE7B55tjv9qEkyEi8bgSJeqIgHU%2FU4%3D&sr=b"
 	},  
     "serviceBusTopicName": {
 		"value":"testtopic1234342"
@@ -39,7 +39,7 @@
 		"value":1
 	},
 	"SequenceStartIndex": {
-		"value":1
+		"value":1050
 	}
   }
 }
