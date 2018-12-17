@@ -24,7 +24,7 @@
             "value": "Deny"
         },
         "setStorageAccountExternalIpFirewallrules": {
-            "value": "true"
+            "value": "false"
         },
         "setStorageAccountVnetFirewallrules": {
             "value": "true"
