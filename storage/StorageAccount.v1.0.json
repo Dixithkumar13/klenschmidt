@@ -1,0 +1,240 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+		 "SWL": {
+            "type": "string",
+            "defaultValue": "PCS",
+			"allowedValues": [
+                "PCS",
+                "APP"
+            ],
+            "metadata": {
+                "description": ""
+            }
+        },
+		"storageAccountLocationShortForm": {
+            "type": "string",
+            "defaultValue": "eus",
+			"allowedValues": [
+                "eus",
+                "eus2"
+            ],
+            "metadata": {
+                "description": ""
+            }
+        },
+		"SDLC": {
+            "type": "string",
+            "defaultValue": "Development",
+			"allowedValues": [
+                "Development",
+                "UAT",
+				"PRD"
+            ],
+            "metadata": {
+                "description": ""
+            }
+        },
+        "storageAccountType": {
+            "type": "string",
+            "defaultValue": "Standard_LRS",
+            "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_RAGRS",
+                "Standard_ZRS",
+                "Premium_LRS"
+            ],
+            "metadata": {
+                "description": "Storage Account type. Default - Standard_LRS"
+            }
+        },
+        "storageAccountblobEncryptionEnabled": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "boolean - Enable or disable Blob encryption at Rest. Default is true"
+            }
+        },
+        "storageAccountfileEncryptionEnabled": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "boolean - Enable or disable File encryption at Rest. Default is true"
+            }
+        },
+        "storageAccounthttpsTrafficOnlyEnabled": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "boolean - Enable or disable enforcing HTTPS only access. Default is true"
+            }
+        },
+        "storageAccountlocation": {
+            "type": "string",
+            "metadata": {
+                "description": "Set the location of the Storage Account."
+            }
+        },        
+        "storageAccessTier": {
+            "type": "string",
+            "defaultValue": "Cool",
+            "allowedValues": [
+                "Hot",
+                "Cool"
+            ],
+            "metadata": {
+                "description": "The Access tier of the Storage Account, Default is Cool (Hot is also allowed)"
+            }
+        },
+        "storageKind": {
+            "type": "string",
+            "defaultValue": "StorageV2",
+            "allowedValues": [
+                "StorageV2",
+                "Storage"
+            ],
+            "metadata": {
+                "description": "The the Kind of Storage account. Default is StorageV2"
+            }
+        },		
+		"DefaultAction": {
+            "type": "string",
+            "allowedValues": [
+                "Allow",
+                "Deny"
+            ],
+            "defaultValue": "Allow"
+        },
+		
+        "setStorageAccountExternalIpFirewallrules": {
+            "type": "string",
+            "allowedValues": [
+                "true",
+                "false"
+            ],
+            "defaultValue": "false",
+            "metadata": {
+                "description": "Enable storage account firewall for external IP addresses. Default is true"
+            }
+        },
+        "publicIpRules": {
+            "type": "array",
+            "metadata": {
+                "description": "IP FW rules for Storage Account"
+            }
+        },
+        "setStorageAccountVnetFirewallrules": {
+               "type": "string",
+            "allowedValues": [
+                "true",
+                "false"
+            ],
+            "defaultValue": "false",
+            "metadata": {
+                "description": "Enable storage account firewall for external IP addresses. Default is True"
+            }
+        },        
+        "exixtingVirtualNetworkResourceGroup": {
+            "type": "string",            
+            "metadata": {
+                "description": "Resource group of the vnet that you have subnets with the Microsoft.Storage Service Endpoint enabled"
+            }
+        },
+        "exixtingVirtualNetwork": {
+            "type": "string",            
+            "metadata": {
+                "description": "the vnet exixtingVirtualNetwork you have subnets with the Microsoft.Storage Service Endpoint enabled"
+            }
+        },
+		"exixtingVirtualNetworkSubnets": {
+            "type": "array",            
+            "metadata": {
+                "description": "Array - Array of subnets on vnet that you have enabled the Microsoft.Storage Service Endpoint on"
+            }
+        },
+        "SAtagValues": {
+            "type": "object",
+            "defaultValue": {                
+            }
+        },
+        "numberOfInstances": {
+            "type": "int",
+            "defaultValue": 5,
+            "metadata": {
+                "description": "No of storages to create"
+            }
+        },
+		"sequenceStartIndex": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": ""
+            }
+        }
+    },
+    "variables": {
+		"copy": [
+            {
+                "name": "ipRules",
+                "count": "[length(parameters('publicIpRules'))]",
+                "input": {
+                    "value": "[parameters('publicIpRules')[copyIndex('ipRules')]]",
+                    "action": "Allow"
+                }
+            },
+            {
+                "name": "virtualNetworkRules",
+                "count": "[length(parameters('exixtingVirtualNetworkSubnets'))]",
+                "input": {
+                    "id": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('exixtingVirtualNetworkResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('exixtingVirtualNetwork'), '/subnets/' ,parameters('exixtingVirtualNetworkSubnets')[copyIndex('virtualNetworkRules')])]",
+                    "action": "Allow"
+                }
+            }
+        ],
+        "emptyArray": [],
+        "ipRulesArray": "[if(equals(parameters('setStorageAccountExternalIpFirewallrules'), 'true'), variables('ipRules'), variables('emptyArray'))]",
+        "vnetRulesArray": "[if(equals(parameters('setStorageAccountVnetFirewallrules'), 'true'), variables('virtualNetworkRules'), variables('emptyArray'))]" 
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+			"name": "[toLower(concat(substring(parameters('SWL'), 0, 3),substring(parameters('SDLC'), 0, 3),string(add(parameters('sequenceStartIndex'), copyIndex())),parameters('storageAccountLocationShortForm'),'sa'))]",
+            "apiVersion": "2017-10-01",
+            "location": "[parameters('storageAccountlocation')]",
+            "tags": "[parameters('SAtagValues')]",
+            "sku": {
+                "name": "[parameters('storageAccountType')]"
+            },
+            "kind": "[parameters('storageKind')]",
+            "properties": {
+                "accessTier": "[parameters('storageAccessTier')]",
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": "[variables('vnetRulesArray')]",
+                    "ipRules": "[variables('ipRulesArray')]",
+                    "defaultAction": "[parameters('DefaultAction')]"
+                },
+                "encryption": {
+                    "keySource": "Microsoft.Storage",
+                    "services": {
+                        "blob": {
+                            "enabled": "[parameters('storageAccountblobEncryptionEnabled')]"
+                        },
+                        "file": {
+                            "enabled": "[parameters('storageAccountfileEncryptionEnabled')]"
+                        }
+                    }
+                },
+                "supportsHttpsTrafficOnly": "[parameters('storageAccounthttpsTrafficOnlyEnabled')]"
+            },
+            "copy": {
+                "name": "storagecopy",
+                "count": "[parameters('numberOfInstances')]"
+            }
+        }
+    ],
+    "outputs": {      
+	}
+}

@@ -1,0 +1,66 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+		"SWL": {
+			"value":"PCS"
+		},
+		"storageAccountLocationShortForm": {
+            "value":"eus2"
+		},
+		"SDLC": {
+			"value":"Development"
+        },
+        "publicIpRules": {
+            "value": [
+				"104.211.207.111"             
+            ]
+        },
+        "SAtagValues": {
+            "value": {
+			}
+        },
+        "setStorageAccountExternalIpFirewallrules": {
+            "value": "true"
+        },
+        "setStorageAccountVnetFirewallrules": {
+            "value": "true"
+        },
+        "storageAccessTier": {
+            "value": "Hot"
+        },
+        "storageAccountblobEncryptionEnabled": {
+            "value": true
+        },
+        "storageAccountfileEncryptionEnabled": {
+            "value": true
+        },
+        "storageAccounthttpsTrafficOnlyEnabled": {
+            "value": true
+        },
+        "storageAccountlocation": {
+            "value": "East US2" 
+        },
+        "storageAccountType": {
+            "value": "Standard_LRS"
+        },
+        "storageKind": {
+            "value": "StorageV2"
+        },
+        "exixtingVirtualNetwork": {
+            "value": "testVM-vnet"
+        },
+        "exixtingVirtualNetworkResourceGroup": {
+            "value": "testVM"
+        },        
+        "exixtingVirtualNetworkSubnets": {
+            "value": ["default"]
+        },
+		"numberOfInstances": {
+            "value" : 1
+	    },
+		"sequenceStartIndex": {
+            "value": 1010
+        }
+    }   
+}
