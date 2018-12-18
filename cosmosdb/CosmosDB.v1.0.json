@@ -131,12 +131,12 @@
 		}
 	},
 	"isVirtualNetworkFilterEnabled": {
-      "type": "string",
+      "type": "bool",
 	  "allowedValues": [
-			"true",
-			"false"
+			true,
+			false
 		],
-      "defaultValue": "false",
+      "defaultValue": false,
       "metadata": {
         "description": ""
       }
@@ -228,8 +228,9 @@
 			}
 		}
 	],
-	"vnetRulesArray": "[if(equals(parameters('isVirtualNetworkFilterEnabled'), 'true'), variables('virtualNetworkRules'), variables('emptyArray'))]", 
-	"ipRulesArray": "[if(greater(length(parameters('publicIpRules')), 0), concat(parameters('publicIpRules'),',104.42.195.92,40.76.54.131,52.176.6.30,52.169.50.45,52.187.184.26,0.0.0.0'), '104.42.195.92,40.76.54.131,52.176.6.30,52.169.50.45,52.187.184.26,0.0.0.0')]",
+	"ipRules": "[if(greater(length(parameters('publicIpRules')), 0), concat(parameters('publicIpRules'),',104.42.195.92,40.76.54.131,52.176.6.30,52.169.50.45,52.187.184.26,0.0.0.0'), '')]",
+	"vnetRulesArray": "[if(parameters('isVirtualNetworkFilterEnabled'), variables('virtualNetworkRules'), variables('emptyArray'))]", 
+	"ipRulesArray": "[if(parameters('isVirtualNetworkFilterEnabled'), variables('ipRules'), '')]",
     "offerType": "Standard"
   },
   "resources": [
@@ -258,7 +259,7 @@
 				"failoverPriority": 1
 			  }
 		],
-		"isVirtualNetworkFilterEnabled": "[bool(parameters('isVirtualNetworkFilterEnabled'))]",
+		"isVirtualNetworkFilterEnabled": "[parameters('isVirtualNetworkFilterEnabled')]",
 		"virtualNetworkRules": "[variables('vnetRulesArray')]",			
 		"ipRangeFilter": "[variables('ipRulesArray')]"
       },	  
@@ -272,5 +273,6 @@
     }
   ],
   "outputs": {
+	
   }
 }
