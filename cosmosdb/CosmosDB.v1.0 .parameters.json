@@ -15,19 +15,19 @@
       "value": "Session"
     },
     "maxStalenessPrefix": {
-      "value": 10
+      "value": 30
     },
     "maxIntervalInSeconds": {
-      "value": 5
+      "value": 20
     },  
 	"enableMultipleWriteLocations": {
-      "value": false
+      "value": true
     },
 	"publicIpRules": {
 		"value": "104.211.222.179"
 	},
 	"isVirtualNetworkFilterEnabled": {
-      "value": false
+      "value": true
     },	
 	"exixtingVirtualNetworkResourceGroup": {		
 		"value":"testVM"		
@@ -54,7 +54,7 @@
 		"value": 1
 	},
 	"SequenceStartIndex": {
-		"value": 450
+		"value": 451
 	}
   }
 }
