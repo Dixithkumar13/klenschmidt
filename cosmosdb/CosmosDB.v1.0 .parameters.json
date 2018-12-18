@@ -21,13 +21,13 @@
       "value": 5
     },  
 	"enableMultipleWriteLocations": {
-      "value": true
+      "value": false
     },
 	"publicIpRules": {
-		"value": "96.74.246.57"
+		"value": "104.211.222.179"
 	},
 	"isVirtualNetworkFilterEnabled": {
-      "value": "true"
+      "value": false
     },	
 	"exixtingVirtualNetworkResourceGroup": {		
 		"value":"testVM"		
@@ -45,7 +45,7 @@
 		"value": "PCS"
 	},
 	"CosmosDBLocationShortForm": {
-		"value": "eus2"
+		"value": "eus"
 	},
 	"SDLC": {
 		"value": "Development"		
@@ -54,7 +54,7 @@
 		"value": 1
 	},
 	"SequenceStartIndex": {
-		"value": 51
+		"value": 450
 	}
   }
 }
