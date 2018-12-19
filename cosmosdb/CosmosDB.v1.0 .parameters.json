@@ -21,7 +21,7 @@
       "value": 20
     },  
 	"enableMultipleWriteLocations": {
-      "value": true
+      "value": false
     },
 	"publicIpRules": {
 		"value": "104.211.222.179"
@@ -54,7 +54,7 @@
 		"value": 1
 	},
 	"SequenceStartIndex": {
-		"value": 451
+		"value": 452
 	}
   }
 }
